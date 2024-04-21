@@ -1,0 +1,160 @@
+:root {
+    --shape1W: 5rem;
+    --shape1H: 5rem;
+    /* NOTE: shape1 should be smaller than shape2, so clip works correctly */
+    --shape2W: 15rem;
+    --shape2H: 7rem;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 500;
+
+}
+
+/*App CSS*/
+
+#app {
+    min-height: 100vh;
+    background-color: #dcdcc6;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+}
+
+.container {
+    padding: 4rem;
+}
+
+.main-image {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.image {
+    margin: auto;
+}
+
+/*General CSS*/
+
+.text-white {
+    color: #dcdcc6;
+}
+
+.star-icon {
+    margin: auto;
+    padding-right: 1rem;
+}
+
+.small-text {
+    width: 50vh;
+
+    padding: 1rem 5rem 0 5rem;
+}
+
+.right {
+    text-align: left;
+    float: right;
+}
+
+.active {
+    background: linear-gradient(105.49deg, #1D8CEC, #cd8b8c);
+    transition: all 0.7s ease-in-out;
+    color: #dcdcc6; 
+    padding: 0 5px 0 5px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.active:hover {
+    background: linear-gradient(105.49deg, #0e4676, #1D8CEC);
+}
+
+.inactive {
+    background: #dcdcc6;
+    color: #C16E70;
+    padding: 0 5px 0 5px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.fixed-bottom {
+    background: linear-gradient(105.49deg, #3d1919, #cd8b8c);
+    width: -webkit-fill-available;
+    height: 9rem;
+    position: fixed;
+    bottom: 0;
+}
+
+.floating-panel {
+    /* css for transparent panel */
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    position: absolute;
+    width: 35vh;
+    bottom: 11rem;
+    right: 4rem;
+    padding: 0.5rem;
+    transform: translate(-50%, -50%);
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.text-active {
+    color: #C16E70;
+}
+
+/* display */
+.d-inline-flex {
+    display: inline-flex;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.d-none {
+    display: none;
+}
+
+/* fonts */
+
+.clash-grotesk {
+    font-family: 'Clash Grotesk', sans-serif;
+}
+
+.satoshi {
+    font-family: 'Satoshi', sans-serif;
+}
+
+.boska {
+    font-family: 'Boska', sans-serif;
+}
+
+.p-1 {
+    padding: 10px;
+}
+
+.p-b-0 {
+    padding-bottom: 0;
+}
+
+.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.previous-text {
+    text-decoration: line-through;
+    color: transparent;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
