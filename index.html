@@ -1,131 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400&display=swap" rel="stylesheet">
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@200,400,700&f[]=boska@300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400&display=swap" rel="stylesheet" />
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@200,400,700&f[]=boska@300,400,500,700,900&f[]=pencerio@50&display=swap" rel="stylesheet" />
+    <!-- Production version -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <title>{ findfredonline }</title>
   </head>
+
   <body>  
     <div id="app">
-      <div class="container">
-        <div class="d-flex">
-          <h5 class="star-icon">&#x269D;</h5>
-          
-          <h2 id="summary">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta corrupti quae reiciendis natus modi 
-            <strong id="link_to_projects" class="active" onmouseover="navigate('summary', event)">laboriosam</strong> 
-
-            eius, ab, consequatur dignissimos nisi ullam pariatur omnis. Nihil consequuntur eius sunt odio, tempora molestiae? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius doloremque alias repudiandae a totam at unde modi amet tempore optio molestiae ab autem, voluptatem sit quidem vero earum molestias repellendus. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta corrupti quae reiciendis natus modi laboriosam eius, ab, consequatur dignissimos nisi ullam pariatur omnis. Nihil consequuntur eius sunt odio, tempora molestiae? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius doloremque alias repudiandae a totam at unde modi amet tempore optio molestiae ab autem, voluptatem sit quidem vero earum molestias repellendus. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          </h2>
-
-          <h2 id="projects" class="d-none">
-            <strong id="link_to_projects" class="inactive" onmouseover="navigate('summary', event)">laboriosam</strong> 
-
-            podpor on tut. Ja polka ludju gotovenie sol, tut cenit cxetkajm slovenzem ne. Iz eda tipis posle. So sos lubim vipolnil, tvoi hceme padali sam bo. Miacx imate ludis ili bi. Cxai razlicxju na tri. Troh primer informacia mi des, do nad lubim milion lednek, lukas mokrju pomocijsx on eda. Bolsx dusxan delajsx bu zxe, bi nad tolk krasju glubinju, oni vo zemla gazet imenijt. 
-
-            <strong id="link_to_education" class="active" onmouseover="navigate('projects', event)">Tugde cxitat eda no.</strong> 
-            Sxelk pikant no kak, li domovijt predmetis bez. Bi tot vecxer materju. To pesok cxesajut zxe, ja imat laskajut blagodarim kak, ja voz imame malostis belaruszem.
-          </h2>
-
-          <h2 id="education" class="d-none">
-            <strong id="link_to_education" class="inactive" onmouseover="navigate('projects', event)">Tugde cxitat eda no.</strong> 
-
-            Kai on palcis dirkas cxitanie, bu mai slovio gostis angloju, tut on dumajm polakzem 
-            
-            <strong id="link_to_education" class="active" onmouseover="navigate('education', event)" onclick="navigate_back('education', event)">svekrotec</strong>.
-
-            Mai azia ozeros vseslavju bo. Dusxan zdrovie tof ku. Ti poka prekrasju bez, malostis cxetkajm bil om. Voz ekonomju nebocvetju vi. Da tut mlodic razumijut, nad tozx slabju stotikis te. So udragju angloju gazetis hce. Mi bil sxelk vsektor pomocijt, so voz dusxijm rodzinuf otkritit. Dla cxasis otkritit iz, do des dikju idijm ruszem, so nasx imenim kai.
-          </h2>
+      <div class="container center-container">
+        <div class="menu-item"> 
+          <!-- Your HTML file -->
+          <em data-lucide="star" style="color: #c16e70; font-size: 16px; stroke-width: 0"></em>
         </div>
 
-        <div class="d-flex">
-          <div class="small-text">
-            <p> &#x2600; Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <div class="d-inline-flex justify-center">
+            <h5 class="star-icon">&#x269D;</h5>
+            <h2>
+                <span id="summary" class="main-text">
+                    hi, my name's fred, based in the great 
+                    <strong
+                        class="active blue-active"
+                        data-link="kenya"
+                        onclick="navigate(event)">254</strong>.
+                        i write 
+                        <strong
+                        class="active blue-active"
+                        data-link="code"
+                        onclick="navigate(event)">code</strong>
+                        and 
+                        <strong
+                        class="active blue-active"
+                        data-link="art"
+                        onclick="navigate(event)">do art things</strong>. <br>
+                        
+                        &nbsp; &nbsp; &nbsp; i'm grateful to be alive
+                </span>
 
-            <p> &#x2600; Lorem ipsum dolor sit amet consectetur</p>
-          </div>
-
-          <div class="small-text right">
-            <p> &#x2600; Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda doloremque corrupti distinctio fugiat id? Doloremque corrupti fugit quisquam esse ipsum impedit, suscipit facilis, at ea, voluptates assumenda quos molestiae perspiciatis.</p>
-          </div>
-        </div>
-        
-        <div class="d-flex">
-          <h5 class="star-icon">&#x269D;</h5>
-          <h2>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta corrupti quae reiciendis natus modi laboriosam eius, ab, consequatur dignissimos nisi ullam pariatur omnis. Nihil consequuntur eius sunt odio, tempora molestiae?</h3>
+                <span id="kenya" class="main-text d-none">
+                    is the country code for kenya. great place to live, but there's lots we need to fix. <br>
+                    &nbsp; &nbsp; &nbsp; my hope is that i can be part of the process.
+                </span>
+            </h2>
         </div>
       </div>
 
-      <div class="shape inactive-shape">
-        <div id="items-in-shape" class="hide">
-          <div class="p-1 p-b-0"><div class="small-circle"></div></div>
-          <div class="p-1">
-            <div class="d-inline-flex">
-              <span id="shape-title" class="active"> * laboriosam</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="fixed-bottom">
-        <div class="d-flex">
-          <div class="small-text text-white">
-            <p> &#x2600; Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-
-            <p> &#x2600; Lorem ipsum dolor sit amet consectetur</p>
-          </div>
-
-          <div class="small-text text-white right">
-            <p> &#x2600; Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda doloremque corrupti distinctio fugiat id? Doloremque corrupti fugit quisquam esse ipsum impedit, suscipit facilis, at ea, voluptates assumenda quos molestiae perspiciatis.</p>
-          </div>
-        </div>
-      </div>
+      <div class="container footer"></div>
     </div>
   </body>
 </html>
 
-<style>
-  @import './assets/css/main.css';
-
-  .shape {
-    background: rgba( 255, 255, 255, 0.25 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 3px );
-    -webkit-backdrop-filter: blur( 3px );
-    border-radius: 10px;  
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-
-    position: absolute;
-    transform: translate(-50%, -50%);
-    right: 4rem;
-    transition: clip-path 350ms, width 500ms, height 500ms; /* Add width and height transitions */
-  }
-
-  .inactive-shape {
-    width: var(--shape1W);
-    height: var(--shape1H);
-    clip-path: inset(0 round 50%);
-  }
-
-  .active-shape {
-    --y: calc((100% - var(--shape2H)) / 2);
-    --x: calc((100% - var(--shape2W)) / 2);
-
-    width: var(--shape2W); /* Increase width on hover */
-    height: var(--shape2H); /* Increase height on hover */
-    clip-path: inset(var(--y) var(--x));
-  }
-
-  .small-circle {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #dcdcc6;
-    background-image: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
-  }
-</style>
+<style> @import './assets/css/main.css'; </style>
 
 <!-- import main.js -->
-<script src="./assets/js/main.js"></script>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script> 
+  lucide.createIcons({
+    icons: {
+      Menu,
+      ArrowRight,
+      Globe
+    }
+  }); 
+</script>
+
+<script src="assets/js/main.js"></script>

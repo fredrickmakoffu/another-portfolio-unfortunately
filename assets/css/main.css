@@ -11,7 +11,6 @@ body {
     padding: 0;
     font-family: 'Satoshi', sans-serif;
     font-weight: 500;
-
 }
 
 /*App CSS*/
@@ -19,11 +18,25 @@ body {
 #app {
     min-height: 100vh;
     background-color: #dcdcc6;
-    background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+    background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+}
+
+.main-text {
+    font-size: 2rem;
+    opacity: 1;
+    transition: display 0.5s ease;
 }
 
 .container {
     padding: 4rem;
+}
+
+.center-container {
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    position: absolute;
+    width: -webkit-fill-available;
 }
 
 .main-image {
@@ -38,7 +51,6 @@ body {
 }
 
 /*General CSS*/
-
 .text-white {
     color: #dcdcc6;
 }
@@ -49,9 +61,8 @@ body {
 }
 
 .small-text {
-    width: 50vh;
-
-    padding: 1rem 5rem 0 5rem;
+    width: 70vh;
+    padding: 0rem 3rem 0 3rem;
 }
 
 .right {
@@ -60,24 +71,36 @@ body {
 }
 
 .active {
-    background: linear-gradient(105.49deg, #1D8CEC, #cd8b8c);
     transition: all 0.7s ease-in-out;
-    color: #dcdcc6; 
+    color: #dcdcc6;
     padding: 0 5px 0 5px;
     border-radius: 6px;
     cursor: pointer;
 }
 
+.blue-active {
+    background: linear-gradient(105.49deg, #1d8cec, #cd8b8c);
+}
+
+.gradient-blue {
+    background: linear-gradient(105.49deg, #3d1919, #cd8b8c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;      
+    font-weight: bold;
+  }
+
 .active:hover {
-    background: linear-gradient(105.49deg, #0e4676, #1D8CEC);
+    background: linear-gradient(105.49deg, #0e4676, #1d8cec);
 }
 
 .inactive {
-    background: #dcdcc6;
-    color: #C16E70;
+    background: transparent;
+    color: #c16e70;
     padding: 0 5px 0 5px;
     border-radius: 6px;
     cursor: pointer;
+    text-decoration: overline;
 }
 
 .fixed-bottom {
@@ -109,7 +132,7 @@ body {
 }
 
 .text-active {
-    color: #C16E70;
+    color: #c16e70;
 }
 
 /* display */
@@ -120,6 +143,18 @@ body {
 .d-flex {
     display: flex;
     justify-content: space-between;
+}
+
+.d-inline-flex {
+    display: inline-flex;
+}
+
+.d-inline-flex {
+    display: inline-flex;
+}
+
+.justify-center {
+    justify-content: center;
 }
 
 .d-none {
@@ -140,6 +175,10 @@ body {
     font-family: 'Boska', sans-serif;
 }
 
+.pencerio {
+    font-family: 'Pencerio', sans-serif;
+}
+
 .p-1 {
     padding: 10px;
 }
@@ -153,8 +192,94 @@ body {
     visibility: hidden;
 }
 
+.menu-item {
+    margin-bottom: 2rem;
+}
+
+.footer-item {
+    margin: 3rem 0rem 0rem 0rem;
+}
+
+.float-right {
+    float: right;
+}
+
+.footer {
+    background: linear-gradient(105.49deg, #4A3739, #1C0C0D);
+    position: fixed; 
+    bottom: 0; 
+    width: 100%; 
+    padding: 1rem;
+}
+
 .previous-text {
     text-decoration: line-through;
     color: transparent;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.main-title {
+    font-size: 3rem;
+    letter-spacing: 1px;
+    font-weight: 900;
+}
+
+.shape {
+    position: absolute;
+    right: 4rem;
+    width: max-content;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transform: translate(-50%, -50%);
+    transition:
+        clip-path 350ms,
+        width 500ms,
+        height 500ms; /* Add width and height transitions */
+}
+
+.inactive-shape {
+    width: var(--shape1W);
+    height: var(--shape1H);
+    clip-path: inset(0 round 50%);
+}
+
+.active-shape {
+    --y: calc((100% - var(--shape2H)) / 2);
+    --x: calc((100% - var(--shape2W)) / 2);
+
+    width: var(--shape2W); /* Increase width on hover */
+    height: var(--shape2H); /* Increase height on hover */
+    clip-path: inset(var(--y) var(--x));
+}
+
+.small-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #dcdcc6;
+    background-image: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
+}
+
+.social-icon {
+    margin-right: 1rem; 
+    margin-left: 1rem; 
+    color: #1C0C0D
+}
+
+
+#tooltip {
+    width: max-content;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #222;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 90%;
 }

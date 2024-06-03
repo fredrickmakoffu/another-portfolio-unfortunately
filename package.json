@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "lucide": "^0.383.0"
+  }
+}
