@@ -24,14 +24,7 @@ let link_tag_history = ['summary'];
 const link_arrow = '&#10229;';
 const link_end = '&#10577;';
 const audio_context = new AudioContext();
-const icons = {
-    summary: { icon: 'Star', size: 16, color: '#c16e70' },
-    kenya: { icon: 'Triangle', size: 16, color: '#c16e70' },
-    writing: { icon: 'Moon', size: 16, color: '#c16e70' },
-    music: { icon: 'Star', size: 16, color: '#c16e70' },
-    coding: { icon: 'Star', size: 16, color: '#c16e70' },
-    medium: { icon: 'Star', size: 16, color: '#c16e70' }
-};
+const menu_item = '<span class="menu-parent-item"> <i class="ph-fill ph-chat-teardrop menu-item menu-item-active"></i> <span class="separator separator-active"> | </span> </span>';
 const social_links = [
     {
         icon: 'GitBranchPlus',
@@ -62,6 +55,11 @@ const social_links = [
 const descriptions = {
     summary: ['i think he\'s referring to the fact that there is a lot to be grateful for, but idk man he could be talking about anything', 'i had some time to think about it and i think he\'s talking about the fact that there is a lot to be grateful for'],
 };
+// alert when page loads
+window.onload = () => {
+    var _a;
+    (_a = document.querySelector('.menu-parent-item')) === null || _a === void 0 ? void 0 : _a.classList.add('show');
+};
 function navigate($event) {
     return __awaiter(this, void 0, void 0, function* () {
         const to = $event.currentTarget.dataset.link;
@@ -81,7 +79,7 @@ function navigate($event) {
     });
 }
 function forward(route) {
-    var _a, _b;
+    var _a, _b, _c, _d;
     const target = route.event.currentTarget;
     const parent = target.parentElement;
     const textBefore = () => {
@@ -141,6 +139,18 @@ function forward(route) {
     }
     // load new text
     (_b = document.getElementById(route.to)) === null || _b === void 0 ? void 0 : _b.classList.remove('d-none');
+    // load description if any
+    const description = descriptions[route.to];
+    if (description) {
+        (_c = document.getElementById('small-text')) === null || _c === void 0 ? void 0 : _c.append("<p>" + descriptions[route.to] + "</p>");
+    }
+    // update menu item
+    (_d = document.getElementById('menu')) === null || _d === void 0 ? void 0 : _d.appendChild(document.createRange().createContextualFragment(menu_item));
+    const menu_items = document.querySelectorAll('.menu-parent-item');
+    setTimeout(() => {
+        // get latest menu item
+        menu_items[menu_items.length - 1].classList.add('show');
+    }, 200);
     // store in link tag history
     link_tag_history.push(route.to);
 }
@@ -163,6 +173,13 @@ function backward(route) {
     const currentParentHtml = parent.innerHTML;
     const textafter = (_e = from === null || from === void 0 ? void 0 : from.text_after) === null || _e === void 0 ? void 0 : _e.innerHTML;
     parent.innerHTML = textBefore + currentParentHtml + textafter;
+    // remove last menu item
+    const menu_items = document.querySelectorAll('.menu-parent-item');
+    menu_items[menu_items.length - 1].classList.remove('show');
+    setTimeout(() => {
+        // get latest menu item
+        menu_items[menu_items.length - 1].remove();
+    }, 400);
     // remove last element from link tag history
     link_tag_history.pop();
 }

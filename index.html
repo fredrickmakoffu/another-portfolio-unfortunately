@@ -4,19 +4,25 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400&display=swap" rel="stylesheet" />
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@200,400,700&f[]=boska@300,400,500,700,900&f[]=pencerio@50&display=swap" rel="stylesheet" />
+    
+    <!-- font share -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@200,400,700&f[]=boska@300,400,500,700,900&f[]=pencerio@50&f[]=satoshi@300,400&display=swap" rel="stylesheet" />
+    
+    <!-- Phosphor -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
     <!-- Production version -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+
+    <!-- title -->
     <title>{ findfredonline }</title>
   </head>
 
   <body>  
     <div id="app">
       <div class="container center-container">
-        <div class="menu-item"> 
-          <!-- Your HTML file -->
-          <em data-lucide="star" style="color: #c16e70; font-size: 16px; stroke-width: 0"></em>
+        <div class="menu" id="menu"> 
+          <span class="menu-parent-item"> <i class="ph-fill ph-chat-teardrop menu-item"></i> <span class="separator"> | </span> </span>
         </div>
 
         <div class="d-inline-flex justify-center">
@@ -48,6 +54,45 @@
                 </span>
             </h2>
         </div>
+
+        <!-- descriptions -->
+        <div class="d-flex"><div id="small-text" class="small-text"></div></div>
+
+        <div class="d-block">
+          <div class="footer-item float-right">
+              <div>
+                <a class="social-link" target="" id="myButton2" aria-describedby="tooltip2">
+                  <i class="ph-thin ph-twitter-logo"></i>
+                </a>
+
+                <div id="tooltip2" role="tooltip">
+                  <span class="gradient-blue"> &bull; twitter </span>
+                  <div id="arrow" data-popper-arrow></div>
+                </div>
+              
+                <a class="social-link" target="" id="myButton3" aria-describedby="tooltip3">
+                  <i class="ph-thin ph-linkedin-logo"></i>
+                </a>
+                <div id="tooltip3" role="tooltip">
+                  <span class="gradient-blue"> &bull; linkedin </span>
+                  <div id="arrow" data-popper-arrow></div>
+                </div>
+              
+                <a class="social-link" target="" id="myButton4" aria-describedby="tooltip4">
+                  <i class="ph-thin ph-instagram-logo"></i>
+                </a>
+                <div id="tooltip4" role="tooltip">
+                  <span class="gradient-blue"> &bull; instagram </span>
+                  <div id="arrow" data-popper-arrow></div>
+                </div>
+              </div>
+              
+            
+            <!-- <a class="social-link" target="_blank" href=""> <i class="ph-thin ph-linkedin-logo"></i> </a>
+            <a class="social-link" target="_blank" href=""> <i class="ph-thin ph-spotify-logo"></i> </a>
+            <a class="social-link" target="_blank" href=""> <i class="ph-thin ph-article-medium"></i> </a> -->
+          </div>
+        </div>
       </div>
 
       <div class="container footer"></div>
@@ -55,19 +100,49 @@
   </body>
 </html>
 
-<style> @import './assets/css/main.css'; </style>
+<style> @import './assets/css/main.css'; @import './assets/css/popper.css'; </style>
 
 <!-- import main.js -->
-
-<script src="https://unpkg.com/lucide@latest"></script>
-<script> 
-  lucide.createIcons({
-    icons: {
-      Menu,
-      ArrowRight,
-      Globe
-    }
-  }); 
-</script>
-
 <script src="assets/js/main.js"></script>
+
+<script>
+const buttons = Array.from(document.querySelectorAll('.social-link'));
+const tooltips = Array.from(document.querySelectorAll('[role="tooltip"]'));
+
+const popperInstances = buttons.map((button, index) => {
+  const tooltip = tooltips[index];
+  const popperInstance = Popper.createPopper(button, tooltip, {
+    placement: 'top',
+    modifiers: [
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 20],
+        },
+      },
+    ],
+  });
+
+  const showEvents = ['mouseenter', 'focus', 'mouseover'];
+  const hideEvents = ['mouseleave', 'blur'];
+
+  showEvents.forEach((event) => {
+    button.addEventListener(event, () => show(tooltip, popperInstance), false);
+  });
+
+  hideEvents.forEach((event) => {
+    button.addEventListener(event, () => hide(tooltip));
+  });
+
+  return popperInstance;
+});
+
+function show(tooltip, popperInstance) {
+  tooltip.setAttribute('data-show', '');
+  popperInstance.update();
+}
+
+function hide(tooltip) {
+  tooltip.removeAttribute('data-show');
+}
+</script>

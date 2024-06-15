@@ -1,0 +1,42 @@
+#tooltip, #tooltip2, #tooltip3, #tooltip4 {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  color: white;
+  font-weight: bold;
+  padding: 8px 8px;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  border-radius: 4px;
+  display: none;
+  transition: opacity 1s ease-in;
+  opacity: 0;
+}
+
+#tooltip[data-show], #tooltip2[data-show], #tooltip3[data-show], #tooltip4[data-show] {
+  display: block;
+  opacity: 1;
+}
+
+#arrow,
+#arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+}
+
+#arrow {
+  visibility: hidden;
+}
+
+#arrow::before {
+  visibility: visible;
+  content: '';
+  transform: rotate(45deg);
+}
+
+#tooltip[data-popper-placement^='top'] > #arrow {
+  bottom: -4px;
+}
