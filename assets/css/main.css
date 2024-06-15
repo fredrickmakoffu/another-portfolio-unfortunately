@@ -315,3 +315,7 @@ body {
     margin-left: 2rem;
     margin-right: 2rem;
 }
+
+.description-star {
+    font-size: 10px;
+}

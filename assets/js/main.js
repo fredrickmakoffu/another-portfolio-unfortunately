@@ -54,11 +54,13 @@ const social_links = [
 ];
 const descriptions = {
     summary: ['i think he\'s referring to the fact that there is a lot to be grateful for, but idk man he could be talking about anything', 'i had some time to think about it and i think he\'s talking about the fact that there is a lot to be grateful for'],
+    kenya: ['i think he\'s referring to the fact that there is a lot to be grateful for', 'i had some time to think about it and i think he\'s talking about the fact that there is a lot to be grateful for']
 };
 // alert when page loads
 window.onload = () => {
     var _a;
     (_a = document.querySelector('.menu-parent-item')) === null || _a === void 0 ? void 0 : _a.classList.add('show');
+    loadDescription(link_tag_history[0]);
 };
 function navigate($event) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -79,78 +81,33 @@ function navigate($event) {
     });
 }
 function forward(route) {
-    var _a, _b, _c, _d;
+    var _a, _b;
     const target = route.event.currentTarget;
     const parent = target.parentElement;
-    const textBefore = () => {
-        let previousSibling = target.previousSibling;
-        const tempDiv = document.createElement('div');
-        let previousDivs = [];
-        while (previousSibling) {
-            const node = previousSibling.cloneNode(true);
-            previousDivs.push(node);
-            previousSibling = previousSibling.previousSibling;
-        }
-        for (let i = previousDivs.length - 1; i >= 0; i--) {
-            tempDiv.appendChild(previousDivs[i]);
-        }
-        return tempDiv;
-    };
-    const textAfter = () => {
-        let nextSibling = target.nextSibling;
-        const tempDiv = document.createElement('div');
-        while (nextSibling) {
-            const node = nextSibling.cloneNode(true);
-            tempDiv.appendChild(node);
-            nextSibling = nextSibling.nextSibling;
-        }
-        return tempDiv;
-    };
+    const textBefore = getTextBefore(target);
+    const textAfter = getTextAfter(target);
     const previous_target = (_a = link_history[link_history.length - 1]) === null || _a === void 0 ? void 0 : _a.target;
     link_history.push({
         target: target,
         previous_target: previous_target,
-        text_before: textBefore(),
-        text_after: textAfter()
+        text_before: textBefore,
+        text_after: textAfter
     });
     // mute text
     updateLink(target, Status.INACTIVE);
     // remove the text before the strong element
-    const beforeWrapper = document.createElement('span');
-    beforeWrapper.id = route.current + '-before-wrapper';
-    let previousSibling = target.previousSibling;
-    while (previousSibling) {
-        const node = previousSibling.cloneNode(true);
-        beforeWrapper.appendChild(node);
-        const temp = previousSibling.previousSibling;
-        parent.removeChild(previousSibling);
-        previousSibling = temp;
-    }
-    const wrapper = document.createElement('span');
-    wrapper.id = route.current + '-after-wrapper';
-    let nextSibling = target.nextSibling;
-    // wrapper.classList.add('d-none');
-    while (nextSibling) {
-        const node = nextSibling.cloneNode(true);
-        wrapper.appendChild(node);
-        const temp = nextSibling.nextSibling;
-        parent.removeChild(nextSibling);
-        nextSibling = temp;
-    }
+    removeTextBefore(route, target, parent);
+    // remove the text after the strong element
+    removeTextAfter(route, target, parent);
     // load new text
     (_b = document.getElementById(route.to)) === null || _b === void 0 ? void 0 : _b.classList.remove('d-none');
+    // remove current description
+    const description = document.getElementById('small-text');
+    if (description)
+        description.innerHTML = '';
     // load description if any
-    const description = descriptions[route.to];
-    if (description) {
-        (_c = document.getElementById('small-text')) === null || _c === void 0 ? void 0 : _c.append("<p>" + descriptions[route.to] + "</p>");
-    }
-    // update menu item
-    (_d = document.getElementById('menu')) === null || _d === void 0 ? void 0 : _d.appendChild(document.createRange().createContextualFragment(menu_item));
-    const menu_items = document.querySelectorAll('.menu-parent-item');
-    setTimeout(() => {
-        // get latest menu item
-        menu_items[menu_items.length - 1].classList.add('show');
-    }, 200);
+    loadDescription(route.to);
+    loadSeparator();
     // store in link tag history
     link_tag_history.push(route.to);
 }
@@ -173,6 +130,13 @@ function backward(route) {
     const currentParentHtml = parent.innerHTML;
     const textafter = (_e = from === null || from === void 0 ? void 0 : from.text_after) === null || _e === void 0 ? void 0 : _e.innerHTML;
     parent.innerHTML = textBefore + currentParentHtml + textafter;
+    // remove description
+    const description = document.getElementById('small-text');
+    if (description)
+        description.innerHTML = '';
+    // get description of previous element
+    let description_index = link_tag_history[link_tag_history.length - 2];
+    loadDescription(description_index);
     // remove last menu item
     const menu_items = document.querySelectorAll('.menu-parent-item');
     menu_items[menu_items.length - 1].classList.remove('show');
@@ -208,4 +172,73 @@ function chooseDirection($event) {
     return $event.currentTarget.classList.contains('active')
         ? NavigationDirection.FORWARD
         : NavigationDirection.BACKWARD;
+}
+function loadDescription(string) {
+    const description = descriptions[string];
+    const small_text = document.getElementById('small-text');
+    if (description && small_text) {
+        description.forEach((text, index) => {
+            const p = document.createElement('p');
+            p.innerHTML = '<span class="description-star"> ☀ </span>' + text;
+            small_text.appendChild(p);
+        });
+    }
+}
+function loadSeparator() {
+    var _a;
+    // update menu item
+    (_a = document.getElementById('menu')) === null || _a === void 0 ? void 0 : _a.appendChild(document.createRange().createContextualFragment(menu_item));
+    const menu_items = document.querySelectorAll('.menu-parent-item');
+    setTimeout(() => {
+        // get latest menu item
+        menu_items[menu_items.length - 1].classList.add('show');
+    }, 200);
+}
+function removeTextBefore(route, target, parent) {
+    const beforeWrapper = document.createElement('span');
+    beforeWrapper.id = route.current + '-before-wrapper';
+    let previousSibling = target.previousSibling;
+    while (previousSibling) {
+        const node = previousSibling.cloneNode(true);
+        beforeWrapper.appendChild(node);
+        const temp = previousSibling.previousSibling;
+        parent.removeChild(previousSibling);
+        previousSibling = temp;
+    }
+}
+function removeTextAfter(route, target, parent) {
+    const wrapper = document.createElement('span');
+    wrapper.id = route.current + '-after-wrapper';
+    let nextSibling = target.nextSibling;
+    while (nextSibling) {
+        const node = nextSibling.cloneNode(true);
+        wrapper.appendChild(node);
+        const temp = nextSibling.nextSibling;
+        parent.removeChild(nextSibling);
+        nextSibling = temp;
+    }
+}
+function getTextBefore(target) {
+    let previousSibling = target.previousSibling;
+    const tempDiv = document.createElement('div');
+    let previousDivs = [];
+    while (previousSibling) {
+        const node = previousSibling.cloneNode(true);
+        previousDivs.push(node);
+        previousSibling = previousSibling.previousSibling;
+    }
+    for (let i = previousDivs.length - 1; i >= 0; i--) {
+        tempDiv.appendChild(previousDivs[i]);
+    }
+    return tempDiv;
+}
+function getTextAfter(target) {
+    let nextSibling = target.nextSibling;
+    const tempDiv = document.createElement('div');
+    while (nextSibling) {
+        const node = nextSibling.cloneNode(true);
+        tempDiv.appendChild(node);
+        nextSibling = nextSibling.nextSibling;
+    }
+    return tempDiv;
 }

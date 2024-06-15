@@ -59,11 +59,13 @@ const social_links = [
 ] as Record<string, any>[];
 const descriptions = {
     summary: ['i think he\'s referring to the fact that there is a lot to be grateful for, but idk man he could be talking about anything', 'i had some time to think about it and i think he\'s talking about the fact that there is a lot to be grateful for'],
+    kenya: ['i think he\'s referring to the fact that there is a lot to be grateful for', 'i had some time to think about it and i think he\'s talking about the fact that there is a lot to be grateful for']
 } as Record<string, string[]>;
 
 // alert when page loads
 window.onload = () => {
     document.querySelector('.menu-parent-item')?.classList.add('show')
+    loadDescription(link_tag_history[0])
 }
 
 async function navigate($event: MouseEvent) {
@@ -86,93 +88,38 @@ async function navigate($event: MouseEvent) {
 function forward(route: RouteObject) {
     const target = route.event.currentTarget as HTMLElement
     const parent = target.parentElement as HTMLElement
-    const textBefore = () => {
-        let previousSibling = target.previousSibling;
-        const tempDiv = document.createElement('div');
-        let previousDivs = [] as HTMLElement[];
-
-        while (previousSibling) {
-            const node = previousSibling.cloneNode(true);
-            previousDivs.push(node as HTMLElement);
-            previousSibling = previousSibling.previousSibling;
-        }
-
-        for (let i = previousDivs.length - 1; i >= 0; i--) {
-            tempDiv.appendChild(previousDivs[i]);
-        }
-
-        return tempDiv;
-    }
-
-    const textAfter = () => {
-        let nextSibling = target.nextSibling;
-        const tempDiv = document.createElement('div');
-
-        while (nextSibling) {
-            const node = nextSibling.cloneNode(true);
-            tempDiv.appendChild(node);
-            nextSibling = nextSibling.nextSibling;
-        }
-
-        return tempDiv;
-    }
+    const textBefore = getTextBefore(target)
+    const textAfter = getTextAfter(target)
 
     const previous_target = link_history[link_history.length - 1]?.target as HTMLElement | null
 
     link_history.push({
         target: target,
         previous_target: previous_target,
-        text_before: textBefore(),
-        text_after: textAfter()
+        text_before: textBefore,
+        text_after: textAfter
     } as LinkHistory)
 
     // mute text
     updateLink(target, Status.INACTIVE)
 
     // remove the text before the strong element
-    const beforeWrapper = document.createElement('span');
-    beforeWrapper.id = route.current + '-before-wrapper';
-    let previousSibling = target.previousSibling;
+    removeTextBefore(route, target, parent)
 
-    while (previousSibling) {
-        const node = previousSibling.cloneNode(true);
-        beforeWrapper.appendChild(node);
-        const temp = previousSibling.previousSibling;
-        parent.removeChild(previousSibling);
-
-        previousSibling = temp
-    }
-
-    const wrapper = document.createElement('span');
-    wrapper.id = route.current +  '-after-wrapper';
-    let nextSibling = target.nextSibling;
-    // wrapper.classList.add('d-none');
-
-    while (nextSibling) {
-        const node = nextSibling.cloneNode(true);
-        wrapper.appendChild(node);
-        const temp = nextSibling.nextSibling;
-        parent.removeChild(nextSibling);
-        nextSibling = temp;
-    }
+    // remove the text after the strong element
+    removeTextAfter(route, target, parent)
 
     // load new text
     document.getElementById(route.to)?.classList.remove('d-none')
 
+    // remove current description
+    const description = document.getElementById('small-text')
+    if(description) description.innerHTML = ''
+
     // load description if any
-    const description =  descriptions[route.to]
-    if (description) {
-        document.getElementById('small-text')?.append("<p>" + descriptions[route.to] + "</p>")
-    }
+    loadDescription(route.to)
 
-    // update menu item
-    document.getElementById('menu')?.appendChild(document.createRange().createContextualFragment(menu_item))
-    const menu_items = document.querySelectorAll('.menu-parent-item')
-
-    setTimeout(() => {
-        // get latest menu item
-        menu_items[menu_items.length - 1].classList.add('show') 
-    }, 200)
+    loadSeparator()
 
     // store in link tag history
     link_tag_history.push(route.to)
@@ -201,6 +148,14 @@ function backward(route: RouteObject) {
     const textafter = from?.text_after?.innerHTML
 
     parent.innerHTML = textBefore + currentParentHtml + textafter
+
+    // remove description
+    const description = document.getElementById('small-text')
+    if(description) description.innerHTML = ''
+
+    // get description of previous element
+    let description_index = link_tag_history[link_tag_history.length - 2]
+    loadDescription(description_index)
 
     // remove last menu item
     const menu_items = document.querySelectorAll('.menu-parent-item')
@@ -244,3 +199,88 @@ function chooseDirection($event: MouseEvent) {
         ? NavigationDirection.FORWARD 
         : NavigationDirection.BACKWARD
 } 
+
+function loadDescription(string: string) {
+    const description =  descriptions[string]
+    const small_text = document.getElementById('small-text')
+
+    if (description && small_text) {
+        description.forEach((text, index) => {
+            const p = document.createElement('p')
+            p.innerHTML = '<span class="description-star"> ☀ </span>' + text
+            small_text.appendChild(p)
+        })
+    }
+}
+
+function loadSeparator() {
+    // update menu item
+    document.getElementById('menu')?.appendChild(document.createRange().createContextualFragment(menu_item))
+    const menu_items = document.querySelectorAll('.menu-parent-item')
+
+    setTimeout(() => {
+        // get latest menu item
+        menu_items[menu_items.length - 1].classList.add('show') 
+    }, 200)
+    
+}
+
+function removeTextBefore(route: RouteObject, target: HTMLElement, parent: HTMLElement) {
+    const beforeWrapper = document.createElement('span');
+    beforeWrapper.id = route.current + '-before-wrapper';
+    let previousSibling = target.previousSibling;
+
+    while (previousSibling) {
+        const node = previousSibling.cloneNode(true);
+        beforeWrapper.appendChild(node);
+        const temp = previousSibling.previousSibling;
+        parent.removeChild(previousSibling);
+
+        previousSibling = temp
+    }
+}
+
+function removeTextAfter(route: RouteObject, target: HTMLElement, parent: HTMLElement) {
+    const wrapper = document.createElement('span');
+    wrapper.id = route.current +  '-after-wrapper';
+    let nextSibling = target.nextSibling;
+
+    while (nextSibling) {
+        const node = nextSibling.cloneNode(true);
+        wrapper.appendChild(node);
+        const temp = nextSibling.nextSibling;
+        parent.removeChild(nextSibling);
+        nextSibling = temp;
+    }
+}
+
+function getTextBefore(target:HTMLElement) {
+    let previousSibling = target.previousSibling;
+    const tempDiv = document.createElement('div');
+    let previousDivs = [] as HTMLElement[];
+
+    while (previousSibling) {
+        const node = previousSibling.cloneNode(true);
+        previousDivs.push(node as HTMLElement);
+        previousSibling = previousSibling.previousSibling;
+    }
+
+    for (let i = previousDivs.length - 1; i >= 0; i--) {
+        tempDiv.appendChild(previousDivs[i]);
+    }
+
+    return tempDiv;
+}
+
+function getTextAfter(target:HTMLElement) {
+    let nextSibling = target.nextSibling;
+    const tempDiv = document.createElement('div');
+
+    while (nextSibling) {
+        const node = nextSibling.cloneNode(true);
+        tempDiv.appendChild(node);
+        nextSibling = nextSibling.nextSibling;
+    }
+
+    return tempDiv;
+}
