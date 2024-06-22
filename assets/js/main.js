@@ -58,6 +58,15 @@ const descriptions = {
         " i'm a sucker for a good manga (and i mean good manga, not the avg stuff). my current love is 'Dead Dead Demon's Dededede Destruction'",
         "i love having conversions with people. always feels like you're opening a door to a whole new world"
     ],
+    living: [
+        "fun things i've built 1: {Gsort https://gearhealthsystem.com}, a pharmacy e-commerce app store built as a PWA",
+        "fun things i've built 2: a mockup of a {room https://github.com/fredrickmakoffu/svelte-room}, built with raw CSS",
+        "fun things i've built 3: built a low-code platform to democratize the creation of software to small businesses (its super ded now)"
+    ],
+    fun: [
+        "(gotta thank {@theprimeagen https://www.youtube.com/@ThePrimeTimeagen} for the motivation to learn rust and look for hard things to code)",
+        "(gotta thank {@eatonphil https://twitter.com/eatonphil} for all the motivation to read books and blogs about hard stuff)"
+    ]
 };
 // alert when page loads
 window.onload = () => {
@@ -181,23 +190,45 @@ function loadDescription(string) {
     const description = descriptions[string];
     const small_text = document.getElementById('small-text');
     if (description && small_text) {
-        description.forEach((text, index) => {
+        description.forEach((text) => {
+            let new_text = getLinksInDescription(text);
             const p = document.createElement('p');
-            p.innerHTML = '<span class="description-star"> ☀ </span>' + text;
+            p.innerHTML = '<span class="description-star"> ☀ </span>' + new_text;
             small_text.appendChild(p);
         });
     }
 }
+function getLinksInDescription(text) {
+    if (!(text.includes('{') && text.includes('}')))
+        return text;
+    let new_text = text.split(' ');
+    let current_index = 0;
+    let current_link = {
+        text: '',
+        link: ''
+    };
+    new_text.forEach((t, index) => {
+        var _a;
+        let first_letter = t.charAt(0);
+        if (first_letter == '{') {
+            current_index = index;
+            current_link = {
+                text: t,
+                link: (_a = new_text[index + 1]) === null || _a === void 0 ? void 0 : _a.replace('}', '')
+            };
+        }
+    });
+    // remove index 4 and 5 from array
+    new_text.splice(current_index, 2);
+    // insert link in array
+    new_text.splice(current_index, 0, `<a class="link small " href="${current_link === null || current_link === void 0 ? void 0 : current_link.link}" target="_blank">${current_link === null || current_link === void 0 ? void 0 : current_link.text.replace('{', '')}</a>`);
+    // join array to string
+    return new_text.join(' ');
+}
 function loadSeparator() {
     var _a;
     // update menu item
-    const menu_items = document.querySelectorAll('.menu-parent-item');
     (_a = document.getElementById('menu')) === null || _a === void 0 ? void 0 : _a.appendChild(document.createRange().createContextualFragment(menu_item));
-    setTimeout(() => {
-        // get latest menu item
-        const item = menu_items[menu_items.length];
-        item.style.backgroundColor = 'red';
-    }, 200);
 }
 function removeTextBefore(route, target, parent) {
     const beforeWrapper = document.createElement('span');

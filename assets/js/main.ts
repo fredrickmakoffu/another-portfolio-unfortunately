@@ -21,6 +21,11 @@ enum NavigationDirection {
     BACKWARD = 'backward'
 }
 
+interface LinkObject {
+  text: string
+  link: string
+}
+
 let audio = null as AudioBuffer | null;
 let link_history = [] as LinkHistory[];
 let link_tag_history = ['summary'] as string[];
@@ -32,29 +37,29 @@ const menu_item = '<span class="menu-parent-item show"> <i class="ph-fill ph-cha
 
 const social_links = [
     {
-        icon: 'GitBranchPlus',
-        link: 'https://github.com/fredrickmakoffu/pet-store',
-        name: 'github'
+      icon: 'GitBranchPlus',
+      link: 'https://github.com/fredrickmakoffu/pet-store',
+      name: 'github'
     },
     {
-        icon: 'Linkedin',
-        link: 'https://www.linkedin.com/in/fredrick-makoffu/',
-        name: 'linkedin'
+      icon: 'Linkedin',
+      link: 'https://www.linkedin.com/in/fredrick-makoffu/',
+      name: 'linkedin'
     },
     {
-        icon: 'Tent',
-        link: 'https://room.findfred.com',
-        name: 'a room'
+      icon: 'Tent',
+      link: 'https://room.findfred.com',
+      name: 'a room'
     },
     {
-        icon: 'AudioLines',
-        link: 'https://open.spotify.com/artist/7Hoj9MRu3nFiYfbWy3Reot?si=MMANzcf8TR2WzKxVoTSC3g',
-        name: 'spotify'
+      icon: 'AudioLines',
+      link: 'https://open.spotify.com/artist/7Hoj9MRu3nFiYfbWy3Reot?si=MMANzcf8TR2WzKxVoTSC3g',
+      name: 'spotify'
     },
     {
-        icon: 'Library',
-        link: 'https://medium.com/@wrathofsponge/list/cocaina-bed4b5519711',
-        name: 'medium'
+      icon: 'Library',
+      link: 'https://medium.com/@wrathofsponge/list/cocaina-bed4b5519711',
+      name: 'medium'
     }
 ] as Record<string, any>[];
 const descriptions = {
@@ -63,6 +68,15 @@ const descriptions = {
       " i'm a sucker for a good manga (and i mean good manga, not the avg stuff). my current love is 'Dead Dead Demon's Dededede Destruction'",
       "i love having conversions with people. always feels like you're opening a door to a whole new world"
     ],
+    living: [
+      "fun things i've built 1: {Gsort https://gearhealthsystem.com}, a pharmacy e-commerce app store built as a PWA",
+      "fun things i've built 2: a mockup of a {room https://github.com/fredrickmakoffu/svelte-room}, built with raw CSS",
+      "fun things i've built 3: built a low-code platform to democratize the creation of software to small businesses (its super ded now)"
+    ],
+    fun: [
+      "(gotta thank {@theprimeagen https://www.youtube.com/@ThePrimeTimeagen} for the motivation to learn rust and look for hard things to code)",
+      "(gotta thank {@eatonphil https://twitter.com/eatonphil} for all the motivation to read books and blogs about hard stuff)"
+    ]
 } as Record<string, string[]>;
 
 // alert when page loads
@@ -209,24 +223,50 @@ function loadDescription(string: string) {
     const small_text = document.getElementById('small-text')
 
     if (description && small_text) {
-        description.forEach((text, index) => {
-            const p = document.createElement('p')
-            p.innerHTML = '<span class="description-star"> ☀ </span>' + text
-            small_text.appendChild(p)
+        description.forEach((text) => {
+          let new_text = getLinksInDescription(text) as string
+
+          const p = document.createElement('p')
+          p.innerHTML = '<span class="description-star"> ☀ </span>' + new_text
+          small_text.appendChild(p)
         })
     }
 }
 
+function getLinksInDescription(text: string) {
+  if( !(text.includes('{') && text.includes('}'))) return text
+
+  let new_text = text.split(' ') as string[];
+  let current_index = 0 as number;
+  let current_link = {
+    text: '' as string,
+    link: '' as string
+  } as LinkObject
+
+  new_text.forEach((t, index) => {
+    let first_letter = t.charAt(0) as string;
+    if(first_letter == '{') {
+      current_index = index
+      current_link = {
+        text: t,
+        link: new_text[index + 1]?.replace('}', '') as string
+      }
+    }
+  })
+
+  // remove index 4 and 5 from array
+  new_text.splice(current_index, 2)
+
+  // insert link in array
+  new_text.splice(current_index, 0, `<a class="link small " href="${current_link?.link}" target="_blank">${current_link?.text.replace('{', '')}</a>`)
+
+  // join array to string
+  return new_text.join(' ')
+}
+
 function loadSeparator() {
     // update menu item
-    const menu_items = document.querySelectorAll('.menu-parent-item')
     document.getElementById('menu')?.appendChild(document.createRange().createContextualFragment(menu_item))
-
-    setTimeout(() => {
-        // get latest menu item
-        const item = menu_items[menu_items.length] as HTMLElement
-        item.style.backgroundColor = 'red'
-    }, 200)
 }
 
 function removeTextBefore(route: RouteObject, target: HTMLElement, parent: HTMLElement) {

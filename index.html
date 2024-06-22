@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- font share -->
     <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@200,400,700&f[]=boska@300,400,500,700,900&f[]=pencerio@50&f[]=satoshi@300,400&display=swap" rel="stylesheet" />
-    
+
     <!-- Phosphor -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
     <!-- Production version -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
 
@@ -18,10 +18,10 @@
     <title>{ findfredonline }</title>
   </head>
 
-  <body>  
+  <body>
     <div id="app">
       <div class="container center-container">
-        <div class="menu" id="menu"> 
+        <div class="menu" id="menu">
           <span class="menu-parent-item"> <i class="ph-fill ph-chat-teardrop menu-item"></i> <span class="separator"> | </span> </span>
         </div>
 
@@ -30,19 +30,19 @@
             <h2>
               <span id="summary" class="main-text">
                 hi, my name's fred, based in the great
-                <strong class="active blue-active" data-link="kenya" onclick="navigate(event)">254</strong>. 
-                
+                <strong class="active blue-active" data-link="kenya" onclick="navigate(event)">254</strong>.
+
                 <strong class="active blue-active" data-link="code" onclick="navigate(event)">i write code</strong>
                 and
                 <strong class="active blue-active" data-link="art" onclick="navigate(event)">do art things</strong>. <br>
                 &nbsp; &nbsp; &nbsp; i'm grateful to be alive
             </span>
-            
+
             <span id="kenya" class="main-text d-none">
               is the country code for kenya. great place to live, but there's lots we need to fix. <br>
                 &nbsp; &nbsp; &nbsp; my hope is that i can be part of the process.
             </span>
-            
+
             <span id="code" class="main-text d-none">
                 for
                 <strong class="active blue-active" data-link="fun" onclick="navigate(event)">fun</strong>
@@ -50,16 +50,17 @@
                 <strong class="active blue-active" data-link="living" onclick="navigate(event)">living</strong>.
                 i'm particularly interested in people making meaningful changes in their communities.
             </span>
-            
+
             <span id="fun" class="main-text d-none">
-                i'm currently super interested in low-level coding with {rust: github link with rust shit}. its been a wealth of knxwledge. <br>
-                i'm also currently reading {understanding software dynamics: link to book} and designing x designing fun poster-like designs
+                stuff: learning low-level stuff as I learn <a href="https://github.com/fredrickmakoffu/rust-os" class="link">rust</a>. its been a wealth of knxwledge. <br>
+                &nbsp; &nbsp; &nbsp; i'm also currently reading <a href="https://www.oreilly.com/library/view/understanding-software-dynamics/9780137589692/" class="link">understanding software dynamics</a> by robert sikes. <br>
             </span>
-            
+
             <span id="living" class="main-text d-none">
-                i'm web dev of 6+ years, building apps with Laravel, Vue and MySQL. i've been focused on building more resilient, reliable and performant apps lately, with scalability and maintaibility in mind. i have 2+ years as a founder too, which helped give meaning to work i do
+                as a web dev building resilient, reliable and performant systems with <a class="link gradient-blue" href="https://laravel.com/">laravel</a>, <a class="link gradient-blue" href="https://vuejs.org/">vuejs</a> and <a class="link gradient-blue" href="https://www.mysql.com/">mysql</a> <br>
+                &nbsp; &nbsp; &nbsp; worked mostly with startups, including <a class="link gradient-blue" href="">one of my own</a> at a point
             </span>
-            
+
             <span id="art" class="main-text d-none">
                 i make <a class="link gradient-blue" href="">music</a> sometimes, when my heart's a mess mostly. i also <a class="link gradient-blue" href="">write</a> sometimes, when my mind's a mess. <br>
                 &nbsp; &nbsp; &nbsp; i'm very grateful. i am surrounded by artifacts of creation.
@@ -73,6 +74,15 @@
         <div class="d-block">
           <div class="footer-item float-right">
               <div>
+                <a class="social-link" target="_blank" href="https://github.com/fredrickmakoffu" id="myButton1" aria-describedby="tooltip2">
+                    <i class="ph-thin ph-github-logo"></i>
+                </a>
+
+                <a id="tooltip2" role="tooltip">
+                    <span class="gradient-brown"> &bull; github </span>
+                    <div id="arrow" data-popper-arrow></div>
+                </a>
+
                 <a class="social-link" target="_blank" href="https://twitter.com/wrathofsponge" id="myButton2" aria-describedby="tooltip2">
                   <i class="ph-thin ph-twitter-logo"></i>
                 </a>
@@ -81,7 +91,7 @@
                   <span class="gradient-brown"> &bull; twitter </span>
                   <div id="arrow" data-popper-arrow></div>
                 </a>
-              
+
                 <a class="social-link" target="_blank" href="https://www.linkedin.com/in/fredrick-makoffu" id="myButton3" aria-describedby="tooltip3">
                   <i class="ph-thin ph-linkedin-logo"></i>
                 </a>
@@ -90,7 +100,7 @@
                   <span class="gradient-brown"> &bull; linkedin </span>
                   <div id="arrow" data-popper-arrow></div>
                 </div>
-              
+
                 <a class="social-link" target="_blank" href="https://www.instagram.com/fredrickmakoffu/" id="myButton4" aria-describedby="tooltip4">
                   <i class="ph-thin ph-instagram-logo"></i>
                 </a>

@@ -85,7 +85,7 @@ body {
     background: linear-gradient(105.49deg, #3d1919, #cd8b8c);
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;      
+    -webkit-text-fill-color: transparent;
     font-weight: bold;
 }
 
@@ -93,7 +93,7 @@ body {
     background: linear-gradient(105.49deg, #1d8cec, #cd8b8c);
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;      
+    -webkit-text-fill-color: transparent;
     font-weight: bold;
 }
 
@@ -204,7 +204,7 @@ body {
 }
 
 .menu-item {
-    color: #4A3739; 
+    color: #4A3739;
     font-size: 14px;
 }
 
@@ -216,7 +216,7 @@ body {
 
 .menu-parent-item {
     opacity: 0;
-    transition: opacity 0.5s ease-in-out; 
+    transition: opacity 0.5s ease-in-out;
 }
 
 .menu-parent-item.show {
@@ -233,9 +233,9 @@ body {
 
 .footer {
     background: linear-gradient(105.49deg, #4A3739, #1C0C0D);
-    position: fixed; 
-    bottom: 0; 
-    width: 100%; 
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     padding: 1rem;
 }
 
@@ -327,4 +327,30 @@ body {
 
 .description-star {
     font-size: 10px;
+}
+
+.link {
+    text-decoration: none;
+    background: linear-gradient(105.49deg, #1d8cec, #cd8b8c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.link.small {
+    text-decoration: none;
+    background: linear-gradient(105.49deg, #800000, #cd8b8c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.link.small::after {
+    font-size: 14px;
+}
+
+.link::after {
+    content: "\00A0\2972";
+    font-size: 22px;
 }
