@@ -8,7 +8,7 @@ interface LinkHistory {
     target: HTMLElement,
     previous_target: HTMLElement | null,
     text_before: Element | null,
-    text_after: HTMLDivElement | null 
+    text_after: HTMLDivElement | null
 }
 
 enum Status {
@@ -28,7 +28,7 @@ let link_tag_history = ['summary'] as string[];
 const link_arrow = '&#10229;'
 const link_end = '&#10577;'
 const audio_context = new AudioContext()
-const menu_item = '<span class="menu-parent-item"> <i class="ph-fill ph-chat-teardrop menu-item menu-item-active"></i> <span class="separator separator-active"> | </span> </span>'
+const menu_item = '<span class="menu-parent-item show"> <i class="ph-fill ph-chat-teardrop menu-item menu-item-active"></i> <span class="separator separator-active"> | </span> </span>'
 
 const social_links = [
     {
@@ -58,8 +58,11 @@ const social_links = [
     }
 ] as Record<string, any>[];
 const descriptions = {
-    summary: ['i think he\'s referring to the fact that there is a lot to be grateful for, but idk man he could be talking about anything', 'i had some time to think about it and i think he\'s talking about the fact that there is a lot to be grateful for'],
-    kenya: ['i think he\'s referring to the fact that there is a lot to be grateful for', 'i had some time to think about it and i think he\'s talking about the fact that there is a lot to be grateful for']
+    summary: [
+      "other extra things; i love me a lecture on ethics or philosophy.",
+      " i'm a sucker for a good manga (and i mean good manga, not the avg stuff). my current love is 'Dead Dead Demon's Dededede Destruction'",
+      "i love having conversions with people. always feels like you're opening a door to a whole new world"
+    ],
 } as Record<string, string[]>;
 
 // alert when page loads
@@ -73,7 +76,7 @@ async function navigate($event: MouseEvent) {
     const direction = chooseDirection($event)
     const navigate_route = {
         to: to,
-        current: "summary", 
+        current: "summary",
         event: $event,
     } as RouteObject
 
@@ -119,6 +122,7 @@ function forward(route: RouteObject) {
     // load description if any
     loadDescription(route.to)
 
+    // set separator
     loadSeparator()
 
     // store in link tag history
@@ -129,7 +133,7 @@ function backward(route: RouteObject) {
     const target = route.event.currentTarget as HTMLElement
     const parent = target.parentElement as HTMLElement
     const from = link_history.pop()
-    
+
     // hide new text
     document.getElementById(route.to)?.classList.add('d-none')
 
@@ -160,7 +164,7 @@ function backward(route: RouteObject) {
     // remove last menu item
     const menu_items = document.querySelectorAll('.menu-parent-item')
     menu_items[menu_items.length - 1].classList.remove('show')
-    
+
     setTimeout(() => {
         // get latest menu item
         menu_items[menu_items.length - 1].remove()
@@ -174,7 +178,7 @@ function updateLink(target: HTMLElement, status: Status) {
     if (status === Status.ACTIVE) {
         target.classList.remove('inactive')
         target.classList.add('active')
-        
+
         // remove link arrow from text
         target.innerHTML = target.innerHTML.replace('⟵', '').replace('⥑', '').trim()
     } else {
@@ -195,10 +199,10 @@ function hideLink() {
 }
 
 function chooseDirection($event: MouseEvent) {
-    return ($event.currentTarget as HTMLElement).classList.contains('active') 
-        ? NavigationDirection.FORWARD 
+    return ($event.currentTarget as HTMLElement).classList.contains('active')
+        ? NavigationDirection.FORWARD
         : NavigationDirection.BACKWARD
-} 
+}
 
 function loadDescription(string: string) {
     const description =  descriptions[string]
@@ -215,14 +219,14 @@ function loadDescription(string: string) {
 
 function loadSeparator() {
     // update menu item
-    document.getElementById('menu')?.appendChild(document.createRange().createContextualFragment(menu_item))
     const menu_items = document.querySelectorAll('.menu-parent-item')
+    document.getElementById('menu')?.appendChild(document.createRange().createContextualFragment(menu_item))
 
     setTimeout(() => {
         // get latest menu item
-        menu_items[menu_items.length - 1].classList.add('show') 
+        const item = menu_items[menu_items.length] as HTMLElement
+        item.style.backgroundColor = 'red'
     }, 200)
-    
 }
 
 function removeTextBefore(route: RouteObject, target: HTMLElement, parent: HTMLElement) {

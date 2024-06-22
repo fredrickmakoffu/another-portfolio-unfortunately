@@ -81,13 +81,21 @@ body {
     background: linear-gradient(105.49deg, #1d8cec, #cd8b8c);
 }
 
-.gradient-blue {
+.gradient-brown {
     background: linear-gradient(105.49deg, #3d1919, #cd8b8c);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;      
     font-weight: bold;
-  }
+}
+
+.gradient-blue {
+    background: linear-gradient(105.49deg, #1d8cec, #cd8b8c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;      
+    font-weight: bold;
+}
 
 .active:hover {
     background: linear-gradient(105.49deg, #0e4676, #1d8cec);
@@ -314,6 +322,7 @@ body {
     color: #1C0C0D;
     margin-left: 2rem;
     margin-right: 2rem;
+    cursor: pointer;
 }
 
 .description-star {

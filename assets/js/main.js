@@ -24,7 +24,7 @@ let link_tag_history = ['summary'];
 const link_arrow = '&#10229;';
 const link_end = '&#10577;';
 const audio_context = new AudioContext();
-const menu_item = '<span class="menu-parent-item"> <i class="ph-fill ph-chat-teardrop menu-item menu-item-active"></i> <span class="separator separator-active"> | </span> </span>';
+const menu_item = '<span class="menu-parent-item show"> <i class="ph-fill ph-chat-teardrop menu-item menu-item-active"></i> <span class="separator separator-active"> | </span> </span>';
 const social_links = [
     {
         icon: 'GitBranchPlus',
@@ -53,8 +53,11 @@ const social_links = [
     }
 ];
 const descriptions = {
-    summary: ['i think he\'s referring to the fact that there is a lot to be grateful for, but idk man he could be talking about anything', 'i had some time to think about it and i think he\'s talking about the fact that there is a lot to be grateful for'],
-    kenya: ['i think he\'s referring to the fact that there is a lot to be grateful for', 'i had some time to think about it and i think he\'s talking about the fact that there is a lot to be grateful for']
+    summary: [
+        "other extra things; i love me a lecture on ethics or philosophy.",
+        " i'm a sucker for a good manga (and i mean good manga, not the avg stuff). my current love is 'Dead Dead Demon's Dededede Destruction'",
+        "i love having conversions with people. always feels like you're opening a door to a whole new world"
+    ],
 };
 // alert when page loads
 window.onload = () => {
@@ -107,6 +110,7 @@ function forward(route) {
         description.innerHTML = '';
     // load description if any
     loadDescription(route.to);
+    // set separator
     loadSeparator();
     // store in link tag history
     link_tag_history.push(route.to);
@@ -187,11 +191,12 @@ function loadDescription(string) {
 function loadSeparator() {
     var _a;
     // update menu item
-    (_a = document.getElementById('menu')) === null || _a === void 0 ? void 0 : _a.appendChild(document.createRange().createContextualFragment(menu_item));
     const menu_items = document.querySelectorAll('.menu-parent-item');
+    (_a = document.getElementById('menu')) === null || _a === void 0 ? void 0 : _a.appendChild(document.createRange().createContextualFragment(menu_item));
     setTimeout(() => {
         // get latest menu item
-        menu_items[menu_items.length - 1].classList.add('show');
+        const item = menu_items[menu_items.length];
+        item.style.backgroundColor = 'red';
     }, 200);
 }
 function removeTextBefore(route, target, parent) {

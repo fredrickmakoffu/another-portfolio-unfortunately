@@ -1,0 +1,24 @@
+1. finish text on the page, make sure the they all connect.
+2. animation when text appears
+3. deploy
+
+text
+
+0. hi, my name's fred, based in the great [254]*. i write [code]* and [do art things]*. tbh, i'm grateful to be alive
+
+1.1. 254 is the country code for kenya. great place to live, but there's lots we need to fix.
+    my hope is that i can be part of the process.
+
+----------------------------------------------------------------------
+
+2.1. i write code for [fun]* and for a [living]. i'm particularly interested in people making meaningful changes in their communities.
+
+2.1.1. i'm currently super interested in low-level coding with {rust: github link with rust shit}. its been a wealth of knxwledge.
+    i'm also currently reading {understanding software dynamics: link to book} and designing x designing fun poster-like designs
+
+2.1.2. i'm web dev of 6+ years, building apps with Laravel, Vue and MySQL. i've been focused on building more resilient, reliable and performant apps lately, with scalability and maintaibility in mind. i have 2+ years as a founder too, which helped give meaning to work i do
+
+-------------------------------------------------------------------------
+
+3.1. i make {music: spotify/play music on hover} sometimes, when my heart's a mess mostly. i also {write: medium} sometimes, when my mind's a mess.
+    i'm very grateful. i am surrounded by artifacts of creation.
