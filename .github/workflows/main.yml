@@ -1,8 +1,3 @@
-name: Post-deployment tasks
-run: |
-  echo "Deployment completed"
-  # Add any other commands here
-
 name: Deploy to Server
 
 on:
@@ -18,13 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Deploy to server
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        key: ${{ secrets.SERVER_SSH_KEY }}
-        script: |
-          cd /var/www/portfolio
-          git pull origin master
-          # Add any additional commands needed for your deployment
+    - name: Post-deployment tasks
+      run: |
+        echo "This is a test"
