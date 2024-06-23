@@ -13,6 +13,16 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Post-deployment tasks
+    - name: Install SSH Key
       run: |
-        echo ${{ secrets.SERVER_HOST }} | cut -d'.' -f1
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 400 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+    - name: Deploy to server
+      run: |
+        ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_HOST }} << EOF
+          cd /var/www/portfolio
+          git pull origin master
+          # Add any additional commands needed for your deployment
+        EOF
