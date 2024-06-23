@@ -15,4 +15,6 @@ jobs:
 
     - name: Post-deployment tasks
       run: |
-        echo "This is a test"
+        echo ${{ secrets.SERVER_HOST }}
+        echo ${{ secrets.SERVER_USERNAME }}
+        echo ${{ secrets.SERVER_SSH_KEY }}
