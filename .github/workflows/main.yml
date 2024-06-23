@@ -74,7 +74,8 @@ jobs:
           iiQdmpy0YSGw4GTdBXgDWups+TM2AySQxrbasjRkavB/
           -----END ENCRYPTED PRIVATE KEY-----
 
-        passphrase: ${{ secrets.PASSPHRASE }}
+        passphrase: |
+          boomboom
         script: |
           cd /var/www/portfolio
           git pull origin master
