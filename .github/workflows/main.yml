@@ -18,64 +18,8 @@ jobs:
       with:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USERNAME }}
-        key: |
-          -----BEGIN ENCRYPTED PRIVATE KEY-----
-          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
-          -----END ENCRYPTED PRIVATE KEY-----
-
-        passphrase: |
-          boomboom
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        passphrase: ${{ secrets.PASSPHRASE }}
         script: |
           cd /var/www/portfolio
           git pull origin master
