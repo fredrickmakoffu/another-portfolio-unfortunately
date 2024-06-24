@@ -76,6 +76,9 @@ const descriptions = {
     fun: [
       "(gotta thank {@theprimeagen https://www.youtube.com/@ThePrimeTimeagen} for the motivation to learn rust and look for hard things to code)",
       "(gotta thank {@eatonphil https://twitter.com/eatonphil} for all the motivation to read books and blogs about hard stuff)"
+    ],
+    art: [
+      "i'm very grateful. i am surrounded by artifacts of creation"
     ]
 } as Record<string, string[]>;
 
