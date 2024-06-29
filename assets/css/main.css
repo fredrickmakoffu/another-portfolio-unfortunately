@@ -89,6 +89,14 @@ body {
     font-weight: bold;
 }
 
+.gradient-dark-brown {
+    background: linear-gradient(105.49deg, #502f2f, #664546);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
 .gradient-blue {
     background: linear-gradient(105.49deg, #1d8cec, #cd8b8c);
     background-clip: text;
@@ -353,4 +361,8 @@ body {
 .link::after {
     content: "\00A0\2972";
     font-size: 22px;
+}
+
+.dark-mode {
+    filter: invert(1) hue-rotate(180deg);
 }

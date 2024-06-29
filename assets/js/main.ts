@@ -26,6 +26,8 @@ interface LinkObject {
   link: string
 }
 
+let dark_mode = false as boolean;
+
 let audio = null as AudioBuffer | null;
 let link_history = [] as LinkHistory[];
 let link_tag_history = ['summary'] as string[];
@@ -330,4 +332,16 @@ function getTextAfter(target:HTMLElement) {
     }
 
     return tempDiv;
+}
+
+function darkMode() {
+  const body = document.querySelector('html') as HTMLElement;
+
+  if(dark_mode) {
+    body.classList.remove('dark-mode');
+  } else {
+    body.classList.add('dark-mode');
+  }
+
+  dark_mode = !dark_mode;
 }

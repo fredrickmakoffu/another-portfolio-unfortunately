@@ -18,6 +18,7 @@ var NavigationDirection;
     NavigationDirection["FORWARD"] = "forward";
     NavigationDirection["BACKWARD"] = "backward";
 })(NavigationDirection || (NavigationDirection = {}));
+let dark_mode = false;
 let audio = null;
 let link_history = [];
 let link_tag_history = ['summary'];
@@ -280,4 +281,14 @@ function getTextAfter(target) {
         nextSibling = nextSibling.nextSibling;
     }
     return tempDiv;
+}
+function darkMode() {
+    const body = document.querySelector('html');
+    if (dark_mode) {
+        body.classList.remove('dark-mode');
+    }
+    else {
+        body.classList.add('dark-mode');
+    }
+    dark_mode = !dark_mode;
 }
