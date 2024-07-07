@@ -26,8 +26,21 @@ body {
     transition: display 1s ease-in-out;
 }
 
+@media (max-width: 768px) {
+    .main-text {
+        font-size: 1.7rem;
+        line-height: 37px;
+    }
+}
+
 .container {
     padding: 4rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
 }
 
 .center-container {
@@ -62,6 +75,12 @@ body {
 .small-text {
     width: 70vh;
     padding: 0rem 3rem 0 3rem;
+}
+
+@media (max-width: 768px) {
+    .small-text {
+        padding: 0rem 1rem 0 1rem;
+    }
 }
 
 .right {
@@ -209,6 +228,12 @@ body {
 
 .menu {
     margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .menu {
+        margin-bottom: 0.5rem;
+    }
 }
 
 .menu-item {
@@ -365,4 +390,8 @@ body {
 
 .dark-mode {
     filter: invert(1) hue-rotate(180deg);
+}
+
+@media (30em < width < 50em) {
+  /* … */
 }
