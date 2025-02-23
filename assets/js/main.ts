@@ -32,6 +32,7 @@ let link_tag_history = ["summary"] as string[];
 const link_arrow = "&#10229;";
 const link_end = "&#10577;";
 const menu_item = '<span class="menu-parent-item show"> <i class="ph-fill ph-chat-teardrop menu-item menu-item-active"></i> <span class="separator separator-active"> | </span> </span>';
+
 const descriptions = {
   "summary": [
     "other extra things; i love me a lecture on ethics or philosophy.",
@@ -51,10 +52,11 @@ const descriptions = {
 } as Record<string, string[] >;
 
 // alert when page loads
-window.onload = () => {
-  document.querySelector(".menu-parent-item")?.classList.add("show");
-  loadDescription(link_tag_history[0]);
-};
+// window.onload = () => {
+//   navigate({ currentTarget: document.querySelector(".menu-item-active") } as MouseEvent);
+//   document.querySelector(".menu-parent-item")?.classList.add("show");
+//   loadDescription(link_tag_history[0]);
+// };
 
 async function navigate($event: MouseEvent) {
   const to = ($event.currentTarget as HTMLElement).dataset.link as string;
@@ -340,3 +342,7 @@ function darkMode() {
 
   dark_mode = !dark_mode;
 }
+
+
+
+
